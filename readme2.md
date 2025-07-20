@@ -1,9 +1,10 @@
 # Web Development Setup Reference (Express + Node.js + EJS)
 
-This repository contains:
-- Personal Reference Notes
-- Setup steps
-- Handy commands for building web apps using <mark>**Node.js**, **Express**, **EJS**, **Tailwind CSS**, and **databases** like **MongoDB** and **PostgreSQL** </mark>.
+<b>This repository contains: </br></b>
+👉🏻 Personal Reference Notes <br/>
+👉🏻 Setup steps <br/>
+👉🏻 Handy commands for building web apps using <mark>**Node.js**, **Express**, **EJS**, **Tailwind CSS**, and **databases** like **MongoDB** and **PostgreSQL** </mark>. <br/>
+<br/>
 
 ## 🔧 Git & GitHub Setup
 
@@ -42,15 +43,13 @@ git config --global user.email "your@email.com"
 ```
 
 </details>
-
----
+<br/>
 
 ## ⚙️ NPM vs Install
 
 - `npm init` or `npm init -y` → creates `package.json`
-- `npm install` → installs dependencies listed in `package.json`
-
----
+- `npm install` → installs dependencies listed in `package.json` in `node_modules`
+<br/>
 
 ## 🧪 Common Issues & Fixes
 
@@ -75,23 +74,26 @@ export NVM_DIR="$HOME/.nvm"
 * Server not watching for changes → restart server
 
 </details>
+<br/>
 
----
+## Setups
 
-## 🧱 Project Setup
-
-### Express + Tailwind + DaisyUI
-
+<details>
+<summary>Express</summary>
+<br/>
+  
 ```bash
 npm init -y
 npm i express
 ```
 
 Add `node_modules` to `.gitignore`
+</details>
 
 <details>
-<summary>📦 Tailwind CSS Setup</summary>
-
+<summary>📦 Tailwind CSS</summary>
+<br/>
+  
 ```bash
 npm install -D tailwindcss
 npx tailwindcss init
@@ -133,7 +135,8 @@ npm run tw:build
 
 <details>
 <summary>🎨 DaisyUI</summary>
-
+<br/>
+  
 ```bash
 npm i @tailwindcss/typography daisyui
 ```
@@ -146,13 +149,10 @@ plugins: [require('@tailwindcss/typography'), require('daisyui')]
 
 </details>
 
----
-
-## 🖥️ Server.js Basics
-
 <details>
-<summary>📂 Static Files & Middleware</summary>
-
+<summary>📂 Server.js - Static Files & Middleware</summary>
+<br/>
+  
 ```js
 const path = require('path');
 app.use(express.static(path.join(__dirname, 'public')));
@@ -169,10 +169,10 @@ module.exports = app;
 
 </details>
 
----
-
-## 📝 EJS Template Engine
-
+<details>
+<summary> 📝 EJS Template Engine </summary>
+<br/>
+  
 ```bash
 npm install ejs
 ```
@@ -182,13 +182,11 @@ In `server.js`:
 ```js
 app.set('view engine', 'ejs');
 ```
-
----
-
-## 🛢️ PostgreSQL Setup
+</details>
 
 <details>
-<summary>🐘 Sequelize + Postgres</summary>
+<summary>🛢️ PostgreSQL Setup - Using Sequelize 🐘</summary>
+<br/>
 
 ```bash
 npm install sequelize pg pg-hstore
@@ -199,15 +197,11 @@ In `server.js`:
 ```js
 const Sequelize = require('sequelize');
 ```
-
 </details>
 
----
-
-## 🍃 MongoDB Setup
-
 <details>
-<summary>🌿 Using Mongoose</summary>
+<summary>🍃 MongoDB Setup - Using Mongoose 🌿</summary>
+<br/>
 
 ```bash
 npm install mongoose
@@ -232,44 +226,29 @@ npm install mongodb
 
 </details>
 
----
-
-## 🚀 Deployment with Vercel
-
 <details>
-<summary>vercel.json (Custom Config)</summary>
-
-Example:
-
-```json
-{
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/server.js" }
-  ]
-}
-```
-
+<summary>🚀 Deployment with Vercel</summary>
+  <details>
+  <summary>vercel.json (Custom Config)</summary>
+  
+  Example:
+  
+  ```json
+  {
+    "rewrites": [
+      { "source": "/(.*)", "destination": "/server.js" }
+    ]
+  }
+  ```
+  </details>
 </details>
 
----
-
-## ⚡ Next.js Starter (Optional)
-
+<details>
+<summary>⚡ Next.js Starter (Optional) </summary>
+<br/>
+  
 ```bash
 npx create-next-app@latest my-app --use-npm
 ```
+</details>
 
----
-
-## ✅ Summary
-
-This reference repo helps you set up, troubleshoot, and build with the Express ecosystem. Use it whenever you're working with backend + frontend + database integration.
-
----
-
-```
-
----
-
-Let me know if you'd like a version with clickable sections on GitHub using HTML/CSS inside the README, or if you want me to scaffold the full repo with folders like `/public`, `/views`, `/routes`, etc.
-```
