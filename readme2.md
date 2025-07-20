@@ -1,0 +1,275 @@
+# Web Development Setup Reference (Express + Node.js + EJS)
+
+This repository contains:
+- Personal Reference Notes
+- Setup steps
+- Handy commands for building web apps using <mark>**Node.js**, **Express**, **EJS**, **Tailwind CSS**, and **databases** like **MongoDB** and **PostgreSQL** </mark>.
+
+## 🔧 Git & GitHub Setup
+
+<details>
+<summary>🚀 Initial Setup</summary>
+
+```bash
+git init
+git add .
+git commit -m "Initial commit"
+git remote add origin https://github.com/divyanshu-dugar/repo-name.git
+git push -u origin main  # future pushes can use just: git push
+````
+
+</details>
+
+<details>
+<summary>🌿 Branching Commands</summary>
+
+```bash
+git branch                    # view branches
+git branch -m main            # rename current branch to main
+git checkout main             # switch to main branch
+# OR
+git switch main
+```
+
+</details>
+
+<details>
+<summary>👤 Git Global Configuration</summary>
+
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "your@email.com"
+```
+
+</details>
+
+---
+
+## ⚙️ NPM vs Install
+
+- `npm init` or `npm init -y` → creates `package.json`
+- `npm install` → installs dependencies listed in `package.json`
+
+---
+
+## 🧪 Common Issues & Fixes
+
+<details>
+<summary>❗ NVM Not Found</summary>
+
+```bash
+# If `nvm` is not recognized
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+````
+
+</details>
+
+<details>
+<summary>🧹 Data / Server Troubleshooting</summary>
+
+* Already added bad data → remove it manually
+* Data might not exist → use `?` optional chaining (`data?.field`)
+* Data might not be pushed to hosting server
+* Server not watching for changes → restart server
+
+</details>
+
+---
+
+## 🧱 Project Setup
+
+### Express + Tailwind + DaisyUI
+
+```bash
+npm init -y
+npm i express
+```
+
+Add `node_modules` to `.gitignore`
+
+<details>
+<summary>📦 Tailwind CSS Setup</summary>
+
+```bash
+npm install -D tailwindcss
+npx tailwindcss init
+```
+
+Update `tailwind.config.js`:
+
+```js
+module.exports = {
+  content: ["./views/**/*.html"],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+
+Update `package.json`:
+
+```json
+"scripts": {
+  "tw:build": "tailwindcss build -i ./public/css/tailwind.css -o ./public/css/main.css"
+}
+```
+
+Include in HTML:
+
+```html
+<link rel="stylesheet" href="/css/main.css" />
+```
+
+Build CSS:
+
+```bash
+npm run tw:build
+```
+
+</details>
+
+<details>
+<summary>🎨 DaisyUI</summary>
+
+```bash
+npm i @tailwindcss/typography daisyui
+```
+
+Update plugins in `tailwind.config.js`:
+
+```js
+plugins: [require('@tailwindcss/typography'), require('daisyui')]
+```
+
+</details>
+
+---
+
+## 🖥️ Server.js Basics
+
+<details>
+<summary>📂 Static Files & Middleware</summary>
+
+```js
+const path = require('path');
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json());
+```
+
+```js
+res.sendFile(path.join(__dirname, 'views', 'home.html'));
+```
+
+```js
+module.exports = app;
+```
+
+</details>
+
+---
+
+## 📝 EJS Template Engine
+
+```bash
+npm install ejs
+```
+
+In `server.js`:
+
+```js
+app.set('view engine', 'ejs');
+```
+
+---
+
+## 🛢️ PostgreSQL Setup
+
+<details>
+<summary>🐘 Sequelize + Postgres</summary>
+
+```bash
+npm install sequelize pg pg-hstore
+```
+
+In `server.js`:
+
+```js
+const Sequelize = require('sequelize');
+```
+
+</details>
+
+---
+
+## 🍃 MongoDB Setup
+
+<details>
+<summary>🌿 Using Mongoose</summary>
+
+```bash
+npm install mongoose
+```
+
+In `mongo.js`:
+
+```js
+const mongoose = require('mongoose');
+
+mongoose.connect("mongodb+srv://ddugar:omDUX1qvsnZoGIDT@legosets.fsc8a.mongodb.net/databaseName?retryWrites=true&w=majority&appName=LegoSets");
+```
+
+</details>
+
+<details>
+<summary>📦 MongoDB Native Driver</summary>
+
+```bash
+npm install mongodb
+```
+
+</details>
+
+---
+
+## 🚀 Deployment with Vercel
+
+<details>
+<summary>vercel.json (Custom Config)</summary>
+
+Example:
+
+```json
+{
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/server.js" }
+  ]
+}
+```
+
+</details>
+
+---
+
+## ⚡ Next.js Starter (Optional)
+
+```bash
+npx create-next-app@latest my-app --use-npm
+```
+
+---
+
+## ✅ Summary
+
+This reference repo helps you set up, troubleshoot, and build with the Express ecosystem. Use it whenever you're working with backend + frontend + database integration.
+
+---
+
+```
+
+---
+
+Let me know if you'd like a version with clickable sections on GitHub using HTML/CSS inside the README, or if you want me to scaffold the full repo with folders like `/public`, `/views`, `/routes`, etc.
+```
