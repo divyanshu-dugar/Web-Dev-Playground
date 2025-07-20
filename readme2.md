@@ -1,4 +1,4 @@
-# Web Development Setup Reference (Express + Node.js + EJS)
+# Web Development Setup Reference
 
 <b>This repository contains: </br></b>
 👉🏻 Personal Reference Notes <br/>
