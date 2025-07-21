@@ -2,5 +2,5 @@
 
 | Topic      | Link                                                           |
 | ---------- | -------------------------------------------------------------- |
-| Git-GitHub | [Git GitHub commands](./)                                      |
+| Git-GitHub | [Git GitHub commands](./git-commands.md)                       |
 | Next.js    | [Next.js setup reference readme](./next.js-setup-reference.md) |
