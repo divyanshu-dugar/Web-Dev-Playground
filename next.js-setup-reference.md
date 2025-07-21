@@ -18,31 +18,6 @@ npx create-next-app@latest my-app --use-npm
 - `npm install` → installs dependencies listed in `package.json` in `node_modules`
 <br/>
 
-## 🧪 Common Issues & Fixes
-
-<details>
-<summary>❗ NVM Not Found</summary>
-
-```bash
-# If `nvm` is not recognized
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-````
-
-</details>
-
-<details>
-<summary>🧹 Data / Server Troubleshooting</summary>
-
-* Already added bad data → remove it manually
-* Data might not exist → use `?` optional chaining (`data?.field`)
-* Data might not be pushed to hosting server
-* Server not watching for changes → restart server
-
-</details>
-<br/>
-
 ## Setups
 
 <details>
