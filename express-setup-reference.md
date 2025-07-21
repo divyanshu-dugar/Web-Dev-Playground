@@ -11,7 +11,7 @@ npm i express
 <summary>📂 Server.js - Web server setup using express.js</summary>
 <br/>
 
-```bash
+```js
 const express = require('express'); // "require" the Express module
 const app = express(); // obtain the "app" object
 const HTTP_PORT = process.env.PORT || 8080; // assign a port
