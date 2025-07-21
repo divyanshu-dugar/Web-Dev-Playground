@@ -249,10 +249,14 @@ const Sequelize = require('sequelize');
     }
   }
   ```
+<br/>
 
   <details>
     <summary>API Routes - App Router</summary>
+
+    
   </details>
+<br/>
 
   <details>
     <summary>API Routes - Page Router</summary>
