@@ -362,8 +362,6 @@ npm install mongodb
   <details>
   <summary>vercel.json</summary>
   <br/>
-    
-  Example:
   
   ```json
   {
@@ -384,6 +382,8 @@ npm install mongodb
   }
   ```
   </details>
+
+  <br/>
 </details>
 
 <details>
