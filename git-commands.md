@@ -2,7 +2,8 @@
 
 <details>
 <summary>🚀 Initial Setup</summary>
-
+<br/>
+  
 ```bash
 git init
 git add .
@@ -15,7 +16,8 @@ git push -u origin main  # future pushes can use just: git push
 
 <details>
 <summary>🌿 Branching Commands</summary>
-
+<br/>
+  
 ```bash
 git branch                    # view branches
 git branch -m main            # rename current branch to main
@@ -28,7 +30,8 @@ git switch main
 
 <details>
 <summary>👤 Git Global Configuration</summary>
-
+<br/>
+  
 ```bash
 git config --global user.name "Your Name"
 git config --global user.email "your@email.com"
