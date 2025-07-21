@@ -3,7 +3,7 @@
 <br/>
 
 <details>
-<summary>⚡ Next.js Starter (Optional) </summary>
+<summary>⚡ Next.js Starter </summary>
 <br/>
   
 ```bash
