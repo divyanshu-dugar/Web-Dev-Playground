@@ -2,6 +2,16 @@
 
 <br/>
 
+<details>
+<summary>⚡ Next.js Starter (Optional) </summary>
+<br/>
+  
+```bash
+npx create-next-app@latest my-app --use-npm
+```
+</details>
+<br/>
+
 ## ⚙️ NPM vs Install
 
 - `npm init` or `npm init -y` → creates `package.json`
@@ -354,15 +364,6 @@ npm install mongodb
   </details>
 
   <br/>
-</details>
-
-<details>
-<summary>⚡ Next.js Starter (Optional) </summary>
-<br/>
-  
-```bash
-npx create-next-app@latest my-app --use-npm
-```
 </details>
 
 <details>
