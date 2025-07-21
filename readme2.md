@@ -203,23 +203,139 @@ const Sequelize = require('sequelize');
 <summary>🍃 MongoDB Setup - Using Mongoose 🌿</summary>
 <br/>
 
+This is how we set up MongoDB with **Next.js API routes** using **Mongoose** (ODM). You will create a shared `mongooseConnect()` function and model, then build out CRUD API routes.
+
+### 📦 Install Mongoose
+
 ```bash
 npm install mongoose
-```
+````
 
-In `mongo.js`:
+### 📁 lib/dbUtils.js
+
+This contains both out Mongoose connection logic and the model, in this case `UserModel`.
 
 ```js
-const mongoose = require('mongoose');
+// File: lib/dbUtils.js
 
-mongoose.connect("mongodb+srv://ddugar:omDUX1qvsnZoGIDT@legosets.fsc8a.mongodb.net/databaseName?retryWrites=true&w=majority&appName=LegoSets");
+import mongoose from 'mongoose';
+
+const userSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+});
+
+mongoose.models = {}; // Avoid OverwriteModelError in dev
+export const UserModel = mongoose.model('users', userSchema);
+
+export async function mongooseConnect() {
+  if (mongoose.connections[0].readyState) {
+    return true; // Already connected
+  }
+
+  try {
+    await mongoose.connect("mongodb+srv://<username>:<password>@cluster.mongodb.net/<dbname>?retryWrites=true&w=majority");
+    return true;
+  } catch (err) {
+    throw new Error(err);
+  }
+}
 ```
+
+### 🧩 API Routes – Create, Read (All)
+
+```js
+// File: /pages/api/users/index.js
+
+import { UserModel, mongooseConnect } from '@/lib/dbUtils';
+
+export default async function handler(req, res) {
+  const { name } = req.body;
+  const { method } = req;
+
+  try {
+    await mongooseConnect();
+
+    switch (method) {
+      case 'GET': // GET /api/users
+        const users = await UserModel.find().exec();
+        res.status(200).json(users);
+        break;
+
+      case 'POST': // POST /api/users
+        const newUser = new UserModel({ name });
+        await newUser.save();
+        res.status(200).json({ message: `User: ${name} Created` });
+        break;
+
+      default:
+        res.setHeader('Allow', ['GET', 'POST']);
+        res.status(405).end(`Method ${method} Not Allowed`);
+    }
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+}
+```
+
+### 🧩 API Routes – Read (One), Update, Delete
+
+```js
+// File: /pages/api/users/[id].js
+
+import { UserModel, mongooseConnect } from '@/lib/dbUtils';
+
+export default async function handler(req, res) {
+  const { id } = req.query;
+  const { name } = req.body;
+  const { method } = req;
+
+  try {
+    await mongooseConnect();
+
+    switch (method) {
+      case 'GET': // GET /api/users/:id
+        const user = await UserModel.findById(id).exec();
+        res.status(200).json(user);
+        break;
+
+      case 'PUT': // PUT /api/users/:id
+        await UserModel.updateOne({ _id: id }, { $set: { name } }).exec();
+        res.status(200).json({ message: `User with id: ${id} updated` });
+        break;
+
+      case 'DELETE': // DELETE /api/users/:id
+        await UserModel.deleteOne({ _id: id }).exec();
+        res.status(200).json({ message: `Deleted User with id: ${id}` });
+        break;
+
+      default:
+        res.setHeader('Allow', ['GET', 'PUT', 'DELETE']);
+        res.status(405).end(`Method ${method} Not Allowed`);
+    }
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+}
+```
+
+Setting up MongoDB URI in `.env.local` file:
+
+```
+MONGODB_URI=mongodb+srv://<user>:<pass>@cluster.mongodb.net/dbname
+```
+
+</details>
 
 </details>
 
 <details>
 <summary>📦 MongoDB Native Driver</summary>
-
+<br/>
+  
 ```bash
 npm install mongodb
 ```
