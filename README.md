@@ -8,6 +8,6 @@
 
 | Topic      | Link                                                           |
 | ---------- | -------------------------------------------------------------- |
-| Git-GitHub | [Git GitHub commands](./git-commands.md)                       |
+| Git-GitHub | [Git-GitHub setup](./git-commands.md)                       |
 | Express    | [Express setup](./express-setup-reference.md)                  |
-| Next.js    | [Next.js setup reference readme](./next.js-setup-reference.md) |
+| Next.js    | [Next.js setup](./next.js-setup-reference.md) |
