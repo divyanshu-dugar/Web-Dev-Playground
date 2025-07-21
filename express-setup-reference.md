@@ -7,6 +7,26 @@ npm i express
 
 👉🏻 Add `node_modules` to `.gitignore`
 
+<details>
+<summary>📂 Server.js - Static Files & Middleware</summary>
+<br/>
+  
+```js
+const path = require('path');
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json());
+```
+
+```js
+res.sendFile(path.join(__dirname, 'views', 'home.html'));
+```
+
+```js
+module.exports = app;
+```
+
+</details>
+
 ## Other Setups with Express
 
 <details>
@@ -64,26 +84,6 @@ Update plugins in `tailwind.config.js`:
 
 ```js
 plugins: [require('@tailwindcss/typography'), require('daisyui')]
-```
-
-</details>
-
-<details>
-<summary>📂 Server.js - Static Files & Middleware</summary>
-<br/>
-  
-```js
-const path = require('path');
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.json());
-```
-
-```js
-res.sendFile(path.join(__dirname, 'views', 'home.html'));
-```
-
-```js
-module.exports = app;
 ```
 
 </details>
