@@ -7,6 +7,8 @@ npm i express
 
 👉🏻 Add `node_modules` to `.gitignore`
 
+## Other Setups with Express
+
 <details>
 <summary>📦 Tailwind CSS</summary>
 <br/>
