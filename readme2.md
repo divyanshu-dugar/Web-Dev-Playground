@@ -357,15 +357,29 @@ npm install mongodb
 
 <details>
 <summary>🚀 Deployment with Vercel</summary>
-  <details>
-  <summary>vercel.json (Custom Config)</summary>
+  <br/>
   
+  <details>
+  <summary>vercel.json</summary>
+  <br/>
+    
   Example:
   
   ```json
   {
-    "rewrites": [
-      { "source": "/(.*)", "destination": "/server.js" }
+    "version": 2,
+    "builds": [
+      {
+        "src": "server.js",
+        "use": "@vercel/node",
+        "config": { "includeFiles": ["dist/**"] }
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "server.js"
+      }
     ]
   }
   ```
