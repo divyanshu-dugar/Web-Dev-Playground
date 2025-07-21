@@ -249,7 +249,14 @@ const Sequelize = require('sequelize');
     }
   }
   ```
-  
+
+  <details>
+    <summary>API Routes - App Router</summary>
+  </details>
+
+  <details>
+    <summary>API Routes - Page Router</summary>
+
   ### 🧩 API Routes – Create, Read (All)
   
   ```js
@@ -326,6 +333,7 @@ const Sequelize = require('sequelize');
     }
   }
   ```
+  </details>
   
   Setting up MongoDB URI in `.env.local` file:
   
