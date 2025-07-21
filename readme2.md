@@ -257,7 +257,6 @@ const Sequelize = require('sequelize');
     
   </details>
 <br/>
-
   <details>
     <summary>API Routes - Page Router</summary>
 
@@ -338,6 +337,7 @@ const Sequelize = require('sequelize');
   }
   ```
   </details>
+  <br/>
   
   Setting up MongoDB URI in `.env.local` file:
   
