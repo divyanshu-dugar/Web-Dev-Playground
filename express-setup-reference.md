@@ -41,7 +41,7 @@ module.exports = app;
 
 </details>
 
-## Other Setups with Express
+## Other Setups for Express app
 
 <details>
 <summary>📦 Tailwind CSS</summary>
