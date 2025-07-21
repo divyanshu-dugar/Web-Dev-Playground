@@ -1,4 +1,4 @@
-# Web Development Setup Reference
+# Next.js Setup Reference
 
 <b>This repository contains: </br></b>
 👉🏻 Personal Reference Notes <br/>
