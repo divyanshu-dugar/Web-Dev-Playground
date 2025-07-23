@@ -1,4 +1,4 @@
-# Web-Dev-Playground
+# <div align="center">Web-Dev-Playground</div>
 
 <b>This repository contains: </br></b>
 👉🏻 Personal Reference Notes <br/>
