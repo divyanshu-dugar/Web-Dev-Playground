@@ -21,15 +21,10 @@ npx create-next-app@latest my-app --use-npm
 ## Setups
 
 <details>
-<summary>🍃 MongoDB Setup - Using Mongoose 🌿</summary>
+<summary>🍃 MongoDB + Next.js Setup - Using Mongoose 🌿</summary>
 <br/>
-<br/>
-
-<details>
-  <summary>MongoDB + Next.js</summary>
-  <br/>
     
-  This is how we set up MongoDB with **Next.js API routes** using **Mongoose** (ODM). You will create a shared `mongooseConnect()` function and `model`, then build out CRUD API routes.
+This is how we set up MongoDB with **Next.js API routes** using **Mongoose** (ODM). You will create a shared `mongooseConnect()` function and `model`, then build out CRUD API routes.
   
   ### 📦 Install Mongoose
   
@@ -319,18 +314,11 @@ export async function DELETE(request, { params }) {
   ```
   MONGODB_URI=mongodb+srv://<user>:<pass>@cluster.mongodb.net/dbname
   ```
-  
-  </details>
-
-  <details>
-    <summary>MongoDB + Express.js</summary>
-    <br/>
     
 </details>
 
 <br/>
 </details>
-
 
 <details>
 <summary>📦 MongoDB Native Driver</summary>
