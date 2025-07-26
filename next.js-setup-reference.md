@@ -314,10 +314,7 @@ export async function DELETE(request, { params }) {
   ```
   MONGODB_URI=mongodb+srv://<user>:<pass>@cluster.mongodb.net/dbname
   ```
-    
-</details>
-
-<br/>
+  
 </details>
 
 <details>
