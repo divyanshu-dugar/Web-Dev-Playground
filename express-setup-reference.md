@@ -131,3 +131,13 @@ In `server.js`:
 const Sequelize = require('sequelize');
 ```
 </details>
+
+<details>
+<summary>🍃 MongoDB + Next.js Setup - Using Mongoose 🌿</summary>
+<br/>
+
+```js
+
+```
+
+</details>
