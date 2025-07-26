@@ -1,10 +1,6 @@
 # Next.js Setup Reference
 
 <br/>
-
-<details>
-<summary>⚡ Next.js Starter </summary>
-<br/>
   
 ```bash
 npx create-next-app@latest my-app --use-npm
