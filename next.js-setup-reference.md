@@ -75,6 +75,160 @@ npx create-next-app@latest my-app --use-npm
   <details>
     <summary>API Routes - App Router</summary>
 
+  ### 🧩 API Routes – Create, Read (All)
+  
+  ```js
+  // File: app/api/work-experience/route.js
+
+import { mongooseConnect, WorkExperienceModel } from '@/lib/dbUtils';
+
+export async function GET() {
+  try {
+    await mongooseConnect();
+    const workExperiences = await WorkExperienceModel.find();
+    return new Response(JSON.stringify(workExperiences), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  } catch (err) {
+    console.error('GET error:', err);
+    return new Response(JSON.stringify({ message: err.message }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+}
+
+export async function POST(request) {
+  try {
+    await mongooseConnect();
+    const body = await request.json();
+
+    const newExperience = new WorkExperienceModel(body);
+    await newExperience.save();
+
+    return new Response(
+      JSON.stringify({ message: `Work Experience: ${newExperience.title} Created` }),
+      {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+  } catch (err) {
+    console.error('POST error:', err);
+    return new Response(JSON.stringify({ message: err.message }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+}
+
+  ```
+  
+  ### 🧩 API Routes – Read (One), Update, Delete
+  
+  ```js
+  // File: app/api/work-experience/[id]/route.js
+
+import { mongooseConnect, WorkExperienceModel } from '@/lib/dbUtils';
+
+export async function GET(request, { params }) {
+  try {
+    await mongooseConnect();
+    const { id } = params;
+    
+    const workExperience = await WorkExperienceModel.findById(id);
+    
+    if (!workExperience) {
+      return new Response(JSON.stringify({ message: 'Work experience not found' }), {
+        status: 404,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+    
+    return new Response(JSON.stringify(workExperience), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  } catch (err) {
+    console.error('GET error:', err);
+    return new Response(JSON.stringify({ message: err.message }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+}
+
+export async function PUT(request, { params }) {
+  try {
+    await mongooseConnect();
+    const { id } = params;
+    const body = await request.json();
+    
+    const updatedExperience = await WorkExperienceModel.findByIdAndUpdate(
+      id,
+      body,
+      { new: true } // Return the updated document
+    );
+    
+    if (!updatedExperience) {
+      return new Response(JSON.stringify({ message: 'Work experience not found' }), {
+        status: 404,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+    
+    return new Response(
+      JSON.stringify({ 
+        message: `Work Experience: ${updatedExperience.title} Updated`,
+        data: updatedExperience
+      }),
+      {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+  } catch (err) {
+    console.error('PUT error:', err);
+    return new Response(JSON.stringify({ message: err.message }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+}
+
+export async function DELETE(request, { params }) {
+  try {
+    await mongooseConnect();
+    const { id } = params;
+    
+    const deletedExperience = await WorkExperienceModel.findByIdAndDelete(id);
+    
+    if (!deletedExperience) {
+      return new Response(JSON.stringify({ message: 'Work experience not found' }), {
+        status: 404,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+    
+    return new Response(
+      JSON.stringify({ 
+        message: `Work Experience: ${deletedExperience.title} Deleted`
+      }),
+      {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+  } catch (err) {
+    console.error('DELETE error:', err);
+    return new Response(JSON.stringify({ message: err.message }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+}
+  ```
     
   </details>
 <br/>
