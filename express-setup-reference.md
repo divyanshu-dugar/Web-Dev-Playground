@@ -366,4 +366,34 @@ connectDB(process.env.MONGODB_CONN_STRING)
 * 🪝 Connect this Express API to Next.js client via `/api/sites`.
 
 </details>
+<details>
+<summary>🚀 Deployment with Vercel</summary>
+  
+  <br/>
+  
+  <details>
+  <summary>vercel.json</summary>
+  <br/>
+  
+  ```json
+  {
+    "version": 2,
+    "builds": [
+      {
+        "src": "server.js",
+        "use": "@vercel/node",
+        "config": { "includeFiles": ["dist/**"] }
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "server.js"
+      }
+    ]
+  }
+  ```
+  </details>
 
+  <br/>
+</details>
