@@ -324,38 +324,6 @@ npm install mongodb
 </details>
 
 <details>
-<summary>🚀 Deployment with Vercel</summary>
-  
-  <br/>
-  
-  <details>
-  <summary>vercel.json</summary>
-  <br/>
-  
-  ```json
-  {
-    "version": 2,
-    "builds": [
-      {
-        "src": "server.js",
-        "use": "@vercel/node",
-        "config": { "includeFiles": ["dist/**"] }
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "server.js"
-      }
-    ]
-  }
-  ```
-  </details>
-
-  <br/>
-</details>
-
-<details>
 <summary><strong>Setup Global SWR Configuration in Next.js (App Router)</strong></summary>
 
 #### 📁 1. Create a fetcher function
