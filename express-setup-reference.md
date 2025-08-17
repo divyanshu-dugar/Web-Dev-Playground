@@ -133,8 +133,12 @@ const Sequelize = require('sequelize');
 </details>
 
 <details>
-<summary>🍃 MongoDB + Next.js Setup - Using Mongoose 🌿</summary>
+<summary>🍃 MongoDB + Express Setup - Using Mongoose 🌿</summary>
 <br/>
+
+```
+npm install mongoose
+```
 
 ### 📁 Recommended File/Folder Structure:
 
