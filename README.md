@@ -11,4 +11,4 @@
 | Git-GitHub | [Git-GitHub commands](./git-commands.md)                       |
 | Express    | [Express setup](./express-setup-reference.md)                  |
 | Next.js    | [Next.js setup](./next.js-setup-reference.md) |
-| Web-Dev Library | [Web-Dev library)(./web-dev-library.md) |
+| Web-Dev Library | [Web-Dev library](./web-dev-library.md) |
