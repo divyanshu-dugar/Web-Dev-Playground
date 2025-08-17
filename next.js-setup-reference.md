@@ -1,18 +1,9 @@
 # Next.js Setup Reference
 
-<br/>
-  
 ```bash
 npx create-next-app@latest my-app --use-npm
 ```
 </details>
-<br/>
-
-## ⚙️ NPM vs Install
-
-- `npm init` or `npm init -y` → creates `package.json`
-- `npm install` → installs dependencies listed in `package.json` in `node_modules`
-<br/>
 
 ## Setups
 
