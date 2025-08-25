@@ -400,6 +400,16 @@ const Sequelize = require('sequelize');
   }
   ```
   </details>
+  <details>
+  <summary>Error Code and Fixed</summary>
+  1. 404 
+    a. Missing vercel.json
+    b. Missing module.exports = app; (at the end of server.js)
+  2. 500 
+    a. Add environment variables
+    b. const dotenv = require("dotenv");
+       dotenv.config();
+  </details>
 
   <br/>
 </details>
