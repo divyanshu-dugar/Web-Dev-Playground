@@ -8,6 +8,25 @@ npx create-next-app@latest my-app --use-npm
 ## Setups
 
 <details>
+<summary>Tailwindcss + Next.js Setup</summary>
+
+```js
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx}",
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+}
+```
+
+</details>
+
+<details>
 <summary>🍃 MongoDB + Next.js Setup - Using Mongoose 🌿</summary>
 <br/>
     
