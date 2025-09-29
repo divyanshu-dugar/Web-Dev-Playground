@@ -9,7 +9,8 @@ npx create-next-app@latest my-app --use-npm
 
 <details>
 <summary>Tailwindcss + Next.js Setup</summary>
-
+<br/>
+  
 ```js
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -24,6 +25,9 @@ export default {
 }
 ```
 
+```js
+@import "tailwindcss";
+```
 </details>
 
 <details>
