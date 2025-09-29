@@ -12,6 +12,8 @@ npx create-next-app@latest my-app --use-npm
 <br/>
   
 ```js
+// File - talwind.config.js
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -26,6 +28,8 @@ export default {
 ```
 
 ```js
+// File - globals.css
+
 @import "tailwindcss";
 ```
 </details>
