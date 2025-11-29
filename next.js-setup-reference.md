@@ -293,33 +293,7 @@ FACEBOOK_CLIENT_SECRET=your-facebook-app-secret
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your-clerk-publishable-key
 CLERK_SECRET_KEY=your-clerk-secret-key
 ```
-</details>
 
-<details>
-<summary>Tailwindcss + Next.js Setup</summary>
-<br/>
-  
-```js
-// File - talwind.config.js
-
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: [
-    "./app/**/*.{js,ts,jsx,tsx}",
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
-  ],
-  theme: {
-    extend: {},
-  },
-}
-```
-
-```js
-// File - globals.css
-
-@import "tailwindcss";
-```
 
 🔹 NextAuth Environment Variables
 ## 🔐 NEXTAUTH_SECRET
@@ -420,6 +394,33 @@ Put in .env.local:
 FACEBOOK_CLIENT_ID=xxxx
 FACEBOOK_CLIENT_SECRET=xxxx
 
+</details>
+
+<details>
+<summary>Tailwindcss + Next.js Setup</summary>
+<br/>
+  
+```js
+// File - talwind.config.js
+
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx}",
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+}
+```
+
+```js
+// File - globals.css
+
+@import "tailwindcss";
+```
 </details>
 
 <details>
