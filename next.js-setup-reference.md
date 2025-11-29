@@ -320,6 +320,106 @@ export default {
 
 @import "tailwindcss";
 ```
+
+🔹 NextAuth Environment Variables
+## 🔐 NEXTAUTH_SECRET
+
+This is just a randomly generated key.
+
+Generate it:
+
+Option 1 (recommended)
+openssl rand -base64 32
+
+Option 2 (in VSCode terminal)
+node -e "console.log(require('crypto').randomBytes(32).toString('base64'));"
+
+
+Put this in .env.local:
+
+NEXTAUTH_SECRET=your_generated_secret_here
+
+🔹 Google OAuth Credentials (Google Client ID & Secret)
+Steps:
+
+Go to Google Cloud Console
+https://console.cloud.google.com/
+
+Create a project (or use an existing one)
+
+Left sidebar → APIs & Services → OAuth consent screen
+
+Choose: External
+
+Fill app name + email
+
+Save
+
+Left sidebar → Credentials
+
+Click Create Credentials → OAuth Client ID
+
+Application type: Web Application
+
+Add redirect URIs:
+
+http://localhost:3000/api/auth/callback/google
+
+
+Google gives you:
+
+GOOGLE_CLIENT_ID=xxxx
+GOOGLE_CLIENT_SECRET=xxxx
+
+🔹 GitHub OAuth Credentials
+Steps:
+
+Go to
+https://github.com/settings/developers
+
+Click OAuth Apps → New OAuth App
+
+Fill:
+
+Homepage URL:
+
+http://localhost:3000
+
+
+Authorization callback URL:
+
+http://localhost:3000/api/auth/callback/github
+
+
+GitHub gives:
+
+GITHUB_ID=xxxx
+GITHUB_SECRET=xxxx
+
+🔹 Facebook OAuth Credentials
+Steps:
+
+Go to
+https://developers.facebook.com/
+
+Create App → Choose Consumer
+
+Add product: Facebook Login → Web
+
+Set redirect URL:
+
+http://localhost:3000/api/auth/callback/facebook
+
+
+Go to Settings → Basic
+
+Copy App ID and App Secret
+
+Put in .env.local:
+
+FACEBOOK_CLIENT_ID=xxxx
+FACEBOOK_CLIENT_SECRET=xxxx
+
 </details>
 
 <details>
