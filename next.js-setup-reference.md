@@ -8,6 +8,294 @@ npx create-next-app@latest my-app --use-npm
 ## Setups
 
 <details>
+<summary>NextAuth - OAuth</summary>
+
+## NextAuth.js
+
+NextAuth.js is the standard for Next.js applications and handles OAuth beautifully.
+
+### Installation
+```bash
+npm install next-auth
+```
+
+### 1. Setup API Route
+
+**app/api/auth/[...nextauth]/route.ts**
+```tsx
+import NextAuth, { type NextAuthOptions } from 'next-auth';
+import GoogleProvider from 'next-auth/providers/google';
+import GitHubProvider from 'next-auth/providers/github';
+import FacebookProvider from 'next-auth/providers/facebook';
+import type { JWT } from 'next-auth/jwt';
+import type { Session } from 'next-auth';
+
+export const authOptions: NextAuthOptions = {
+  providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
+    GitHubProvider({
+      clientId: process.env.GITHUB_ID!,
+      clientSecret: process.env.GITHUB_SECRET!,
+    }),
+    FacebookProvider({
+      clientId: process.env.FACEBOOK_CLIENT_ID!,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET!,
+    }),
+  ],
+
+  callbacks: {
+    async jwt({ token, user, account }): Promise<JWT> {
+      if (user) {
+        token.id = (user as any).id; // NextAuth default user doesn't include id
+      }
+      if (account?.access_token) {
+        token.accessToken = account.access_token;
+      }
+      return token;
+    },
+
+    async session({ session, token }): Promise<Session> {
+      if (session.user) {
+        (session.user as any).id = token.id;
+      }
+      (session as any).accessToken = token.accessToken;
+      return session;
+    }
+  },
+
+  pages: {
+    signIn: '/auth/signin',
+    signUp: '/auth/signup',
+  },
+
+  secret: process.env.NEXTAUTH_SECRET!,
+};
+
+const handler = NextAuth(authOptions);
+export { handler as GET, handler as POST };
+
+```
+
+### 2. Create Auth Provider
+
+**providers/AuthProvider.tsx**
+```tsx
+'use client';
+
+import { SessionProvider } from 'next-auth/react';
+
+export default function AuthProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return <SessionProvider>{children}</SessionProvider>;
+}
+```
+
+### 3. Update Layout
+
+**app/layout.tsx**
+```tsx
+import AuthProvider from '@/providers/AuthProvider';
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body>
+        <AuthProvider>
+          <Header />
+          <main>{children}</main>
+        </AuthProvider>
+      </body>
+    </html>
+  );
+}
+```
+
+### 4. Create Sign-in Page
+
+**app/auth/signin/page.tsx**
+```tsx
+'use client';
+
+import { signIn, getSession } from 'next-auth/react';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+
+export default function SignIn() {
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+
+  const handleOAuthSignIn = async (provider: string) => {
+    setIsLoading(true);
+    try {
+      const result = await signIn(provider, {
+        redirect: false,
+        callbackUrl: '/dashboard',
+      });
+      
+      if (result?.ok) {
+        router.push('/dashboard');
+      }
+    } catch (error) {
+      console.error('Sign in error:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-8">
+        <div>
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            Sign in to VapeStore
+          </h2>
+          <p className="mt-2 text-center text-sm text-gray-600">
+            Access your account with
+          </p>
+        </div>
+        
+        <div className="mt-8 space-y-4">
+          <button
+            onClick={() => handleOAuthSignIn('google')}
+            disabled={isLoading}
+            className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors duration-300 disabled:opacity-50"
+          >
+            <span className="absolute left-0 inset-y-0 flex items-center pl-3">
+              🔍
+            </span>
+            {isLoading ? 'Signing in...' : 'Continue with Google'}
+          </button>
+
+          <button
+            onClick={() => handleOAuthSignIn('github')}
+            disabled={isLoading}
+            className="group relative w-full flex justify-center py-3 px-4 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors duration-300 disabled:opacity-50"
+          >
+            <span className="absolute left-0 inset-y-0 flex items-center pl-3">
+              💻
+            </span>
+            {isLoading ? 'Signing in...' : 'Continue with GitHub'}
+          </button>
+
+          <button
+            onClick={() => handleOAuthSignIn('facebook')}
+            disabled={isLoading}
+            className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-300 disabled:opacity-50"
+          >
+            <span className="absolute left-0 inset-y-0 flex items-center pl-3">
+              📘
+            </span>
+            {isLoading ? 'Signing in...' : 'Continue with Facebook'}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+### 5. Update Navbar with Auth
+
+**components/Layout/Navbar.tsx**
+```tsx
+'use client';
+
+import { useSession, signOut } from 'next-auth/react';
+import { useState } from 'react';
+
+export default function Navbar() {
+  const { data: session, status } = useSession();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  return (
+    <nav className="...">
+      {/* ... other nav code ... */}
+      
+      {status === 'loading' ? (
+        <div className="animate-pulse">Loading...</div>
+      ) : session ? (
+        <div className="relative">
+          <button
+            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            className="flex items-center space-x-2"
+          >
+            <img
+              src={session.user?.image || '/default-avatar.png'}
+              alt={session.user?.name || 'User'}
+              className="w-8 h-8 rounded-full"
+            />
+            <span>{session.user?.name}</span>
+          </button>
+          
+          {isDropdownOpen && (
+            <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1">
+              <button
+                onClick={() => signOut()}
+                className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+              >
+                Sign Out
+              </button>
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className="flex space-x-4">
+          <Link
+            href="/auth/signin"
+            className="text-gray-700 hover:text-purple-600"
+          >
+            Sign In
+          </Link>
+          <Link
+            href="/auth/signup"
+            className="bg-purple-600 text-white px-4 py-2 rounded-md"
+          >
+            Sign Up
+          </Link>
+        </div>
+      )}
+    </nav>
+  );
+}
+```
+
+## Environment Variables
+
+**.env.local**
+```env
+# NextAuth.js
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=your-secret-key-here
+
+# Google OAuth
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
+
+# GitHub OAuth
+GITHUB_ID=your-github-id
+GITHUB_SECRET=your-github-secret
+
+# Facebook OAuth
+FACEBOOK_CLIENT_ID=your-facebook-app-id
+FACEBOOK_CLIENT_SECRET=your-facebook-app-secret
+
+# Clerk (if using)
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your-clerk-publishable-key
+CLERK_SECRET_KEY=your-clerk-secret-key
+```
+</details>
+
+<details>
 <summary>Tailwindcss + Next.js Setup</summary>
 <br/>
   
