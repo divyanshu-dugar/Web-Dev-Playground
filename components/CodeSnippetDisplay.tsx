@@ -515,10 +515,10 @@ export default function UserList() {
             <FileCode className="w-12 h-12 text-white" />
           </div>
           <h1 className="text-4xl md:text-5xl font-bold bg-linear-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
-            Web Development Snippets
+            Next.js Code Snippets
           </h1>
           <p className="text-gray-400 mt-4 text-lg max-w-3xl mx-auto">
-            A collection of production-ready code snippets with beautiful syntax highlighting
+            A collection of production-ready code snippets
           </p>
         </div>
 
