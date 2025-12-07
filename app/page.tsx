@@ -371,7 +371,7 @@ export default function HomePage() {
                 </div>
                 <h3 className="text-xl font-bold text-white mb-2">No resources found</h3>
                 <p className="text-gray-400">
-                  Try adjusting your search or filter to find what you're looking for.
+                  Try adjusting your search or filter to find what you&apos;re looking for.
                 </p>
               </div>
             )}
