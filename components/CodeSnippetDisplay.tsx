@@ -34,7 +34,7 @@ const CodeSnippetDisplay = () => {
     'swr-app': false,
     'swr-page': false
   });
-  const codeBlocksRef = useRef<(HTMLDivElement | null)[]>([]);
+  const codeBlocksRef = useRef<(HTMLPreElement | null)[]>([]);
 
   // Initialize Prism highlighting
   useEffect(() => {
@@ -507,14 +507,14 @@ export default function UserList() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-950 p-4 md:p-8">
+    <div className="min-h-screen bg-linear-to-br from-gray-900 to-gray-950 p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-12 text-center">
-          <div className="inline-flex items-center justify-center p-4 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl mb-6">
+          <div className="inline-flex items-center justify-center p-4 bg-linear-to-r from-purple-600 to-blue-600 rounded-2xl mb-6">
             <FileCode className="w-12 h-12 text-white" />
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-5xl font-bold bg-linear-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
             Web Development Snippets
           </h1>
           <p className="text-gray-400 mt-4 text-lg max-w-3xl mx-auto">
@@ -610,7 +610,7 @@ export default function UserList() {
                   <div className="p-6 pt-5 space-y-6">
                     {sectionSnippets.map((snippet, index) => (
                       <div key={snippet.id} className="border border-gray-700 rounded-xl overflow-hidden bg-gray-900/50 backdrop-blur-sm">
-                        <div className="px-6 py-4 border-b border-gray-800 bg-gradient-to-r from-gray-900 to-gray-800">
+                        <div className="px-6 py-4 border-b border-gray-800 bg-linear-to-r from-gray-900 to-gray-800">
                           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                             <div className="flex items-center gap-3">
                               {snippet.icon}
@@ -644,16 +644,20 @@ export default function UserList() {
                           </div>
                         </div>
                         <div className="relative">
-                          <div className="absolute top-0 left-0 right-0 h-8 bg-gradient-to-b from-gray-900 to-transparent pointer-events-none" />
+                          <div className="absolute top-0 left-0 right-0 h-8 bg-linear-to-b from-gray-900 to-transparent pointer-events-none" />
                           <pre 
-                            ref={el => codeBlocksRef.current[index] = el}
-                            className="!m-0 !p-6 bg-gray-900 text-gray-100 overflow-x-auto text-sm leading-relaxed scrollbar-thin max-h-[500px] overflow-y-auto"
+  ref={el => {
+    if (el && codeBlocksRef.current) {
+      codeBlocksRef.current[index] = el;
+    }
+  }}
+                            className="m-0! p-6! bg-gray-900 text-gray-100 overflow-x-auto text-sm leading-relaxed scrollbar-thin max-h-[500px] overflow-y-auto"
                           >
                             <code className={`language-${snippet.prismLanguage}`}>
                               {snippet.code}
                             </code>
                           </pre>
-                          <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-gray-900 to-transparent pointer-events-none" />
+                          <div className="absolute bottom-0 left-0 right-0 h-8 bg-linear-to-t from-gray-900 to-transparent pointer-events-none" />
                         </div>
                         {snippet.tags && snippet.tags.length > 0 && (
                           <div className="px-6 py-3 border-t border-gray-800 bg-gray-900/80">
@@ -681,23 +685,23 @@ export default function UserList() {
         {/* Footer Stats */}
         <div className="mt-12 pt-8 border-t border-gray-800">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="text-center p-6 bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl shadow-xl border border-gray-700">
+            <div className="text-center p-6 bg-linear-to-br from-gray-800 to-gray-900 rounded-2xl shadow-xl border border-gray-700">
               <div className="text-3xl font-bold text-purple-400">{snippets.length}</div>
               <div className="text-gray-400 text-sm mt-2">Total Snippets</div>
             </div>
-            <div className="text-center p-6 bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl shadow-xl border border-gray-700">
+            <div className="text-center p-6 bg-linear-to-br from-gray-800 to-gray-900 rounded-2xl shadow-xl border border-gray-700">
               <div className="text-3xl font-bold text-blue-400">
                 {Array.from(new Set(snippets.flatMap(s => s.tags || []))).length}
               </div>
               <div className="text-gray-400 text-sm mt-2">Technologies</div>
             </div>
-            <div className="text-center p-6 bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl shadow-xl border border-gray-700">
+            <div className="text-center p-6 bg-linear-to-br from-gray-800 to-gray-900 rounded-2xl shadow-xl border border-gray-700">
               <div className="text-3xl font-bold text-green-400">
                 {Array.from(new Set(snippets.map(s => s.language))).length}
               </div>
               <div className="text-gray-400 text-sm mt-2">Languages</div>
             </div>
-            <div className="text-center p-6 bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl shadow-xl border border-gray-700">
+            <div className="text-center p-6 bg-linear-to-br from-gray-800 to-gray-900 rounded-2xl shadow-xl border border-gray-700">
               <div className="text-3xl font-bold text-cyan-400">
                 {snippets.filter(s => s.isSetup).length}
               </div>
