@@ -66,7 +66,7 @@ export default function HomePage() {
       color: 'text-green-400',
       linear: 'from-green-500 to-emerald-500',
       tags: ['Express', 'Node.js', 'REST API', 'Middleware', 'Authentication'],
-      link: '/express-setup-reference',
+      link: '/express-js',
       stats: {
         snippets: 18,
         lastUpdated: '1 week ago'
